@@ -1,0 +1,119 @@
+Dirsearch 使用指南
+用法
+dirsearch.py [-u|--url] 目标网址 [-e|--extensions] 扩展名 [其他选项]
+选项
+--version：显示程序的版本号并退出。
+-h, --help：显示此帮助信息并退出。
+必选项
+-u URL, --url=URL：目标网址，可以使用多个标志。
+-l PATH, --urls-file=PATH：URL 列表文件。
+--stdin：从标准输入读取 URL。
+--cidr=CIDR：目标 CIDR。
+--raw=PATH：从文件加载原始 HTTP 请求（使用 --scheme 标志设置方案）。
+--nmap-report=PATH：从 nmap 报告加载目标（确保在 nmap 扫描时包含 -sV 标志以获得全面结果）。
+-s SESSION_FILE, --session=SESSION_FILE：会话文件。
+--config=PATH：配置文件路径（默认值：DIRSEARCH_CONFIG 环境变量，否则为 config.ini）。
+
+字典设置
+-w WORDLISTS, --wordlists=WORDLISTS：字典文件或包含字典的目录（用逗号分隔）。
+-e EXTENSIONS, --extensions=EXTENSIONS：用逗号分隔的扩展名列表（例如：php,asp）。
+-f, --force-extensions：将扩展名添加到每个字典条目末尾。默认情况下，dirsearch 仅用扩展名替换 %EXT% 关键字。
+-O, --overwrite-extensions：用你选择的扩展名（通过 -e 选择）覆盖字典中的其他扩展名。
+--exclude-extensions=EXTENSIONS：用逗号分隔的排除扩展名列表（例如：asp,jsp）。
+--remove-extensions：移除路径中的扩展名（例如：admin.php -> admin）。
+--prefixes=PREFIXES：为所有字典条目添加自定义前缀（用逗号分隔）。
+--suffixes=SUFFIXES：为所有字典条目添加自定义后缀，忽略目录（用逗号分隔）。
+-U, --uppercase：将字典条目转换为大写。
+-L, --lowercase：将字典条目转换为小写。
+-C, --capital：将字典条目首字母大写。
+
+常规设置
+-t THREADS, --threads=THREADS：线程数量。
+-r, --recursive：递归暴力破解。
+--deep-recursive：对每个目录深度执行递归扫描（例如：api/users -> api/）。
+--force-recursive：对每个找到的路径进行递归暴力破解，而不仅仅是目录。
+-R DEPTH, --max-recursion-depth=DEPTH：最大递归深度。
+--recursion-status=CODES：执行递归扫描的有效状态码，支持范围（用逗号分隔）。
+--subdirs=SUBDIRS：扫描给定 URL 的子目录（用逗号分隔）。
+--exclude-subdirs=SUBDIRS：递归扫描时排除的子目录（用逗号分隔）。
+-i CODES, --include-status=CODES：包含状态码，用逗号分隔，支持范围（例如：200,300-399）。
+-x CODES, --exclude-status=CODES：排除状态码，用逗号分隔，支持范围（例如：301,500-599）。
+--exclude-sizes=SIZES：按大小排除响应，用逗号分隔（例如：0B,4KB）。
+--exclude-text=TEXTS：按文本排除响应，可以使用多个标志。
+--exclude-regex=REGEX：按正则表达式排除响应。
+--exclude-redirect=STRING：如果此正则表达式（或文本）匹配重定向 URL，则排除响应（例如：/index.html）。
+--exclude-response=PATH：排除类似此页面响应的响应，路径作为输入（例如：404.html）。
+--skip-on-status=CODES：命中这些状态码时跳过目标，用逗号分隔，支持范围。
+--min-response-size=LENGTH：最小响应长度。
+--max-response-size=LENGTH：最大响应长度。
+--max-time=SECONDS：扫描的最大运行时间。
+--exit-on-error：遇到错误时退出。
+
+请求设置
+-m METHOD, --http-method=METHOD：HTTP 方法（默认：GET）。
+-d DATA, --data=DATA：HTTP 请求数据。
+--data-file=PATH：包含 HTTP 请求数据的文件。
+-H HEADERS, --header=HEADERS：HTTP 请求头，可以使用多个标志。
+--headers-file=PATH：包含 HTTP 请求头的文件。
+-F, --follow-redirects：跟随 HTTP 重定向。
+--random-agent：为每个请求选择一个随机的 User-Agent。
+--auth=CREDENTIAL：认证凭证（例如：user 或 bearer token）。
+--auth-type=TYPE：认证类型（basic、digest、bearer、ntlm、jwt）。
+--cert-file=PATH：包含客户端证书的文件。
+--key-file=PATH：包含客户端证书私钥的文件（未加密）。
+--user-agent=USER_AGENT：设置自定义 User-Agent。
+--cookie=COOKIE：设置自定义 Cookie。
+
+连接设置
+--timeout=TIMEOUT：连接超时。
+--delay=DELAY：请求之间的延迟。
+-p PROXY, --proxy=PROXY：代理 URL（HTTP/SOCKS），可以使用多个标志。
+--proxies-file=PATH：包含代理服务器的文件。
+--proxy-auth=CREDENTIAL：代理认证凭证。
+--replay-proxy=PROXY：使用找到的路径通过代理重放。
+--tor：使用 Tor 网络作为代理。
+--scheme=SCHEME：为原始请求或 URL 中没有方案的情况设置方案（默认：自动检测）。
+--max-rate=RATE：每秒最大请求数。
+--retries=RETRIES：失败请求的重试次数。
+--ip=IP：服务器 IP 地址。
+--interface=NETWORK_INTERFACE：使用的网络接口。
+
+高级设置
+--crawl：在响应中爬取新路径。
+视图设置
+--full-url：在输出中显示完整的 URL（在安静模式下自动启用）。
+--redirects-history：显示重定向历史。
+--no-color：无彩色输出。
+-q, --quiet-mode：安静模式。
+
+输出设置
+-o PATH/URL, --output=PATH/URL：输出文件或 MySQL/PostgreSQL URL（格式：scheme://[username@]host[]/database-name）。
+--format=FORMAT：报告格式（可用：simple、plain、json、xml、md、csv、html、sqlite、mysql、postgresql）。
+--log=PATH：日志文件。
+
+参考 config.ini 获取示例配置文件。
+
+
+项目地址 https://github.com/maurosoria/dirsearch?tab=readme-ov-file
+
+
+
+=======================================================End==========================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
