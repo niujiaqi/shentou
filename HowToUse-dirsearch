@@ -98,7 +98,7 @@ dirsearch.py [-u|--url] 目标网址 [-e|--extensions] 扩展名 [其他选项]
 
 
 用过的命令：
-python3 dirsearch.py -u https://aw346.com/ -e php,html,js,css -t 10 --exclude-status 404,403 --scheme head.txt -o result.txt
+python3 dirsearch.py --proxy socks5://10.0.0.103:1080 -u https://aw346.com/ -e php,html,js,css -t 10 --exclude-status 404,403 --scheme head.txt -o result.txt
 解释：
 -u https://aw346.com      扫描的目标url
 -e php,html,js,css        目标文件的后缀
@@ -106,8 +106,8 @@ python3 dirsearch.py -u https://aw346.com/ -e php,html,js,css -t 10 --exclude-st
 --exclude-status 404,403  过滤掉响应码404,403的
 --scheme head.txt        为请求添加请求头
 -o result.txt            将扫描结果输出到result.txt文件
-
-
+--proxy socks5://10.0.0.103:1080    设置代理
+--proxy-auth name:password      设置代理验证
 
 
 
