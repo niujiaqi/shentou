@@ -147,6 +147,42 @@ zip -r ceshi.zip ceshi             将一个名为ceshi的目录打包压缩成c
 zip -q -r ceshi.zip ceshi          -q选项：压缩文件时不显示压缩过程的详细信息
 unzip ceshi.zip                    解压到当前目录
 unzip ceshi.zip -d test            解压到test目录下
+
+apt 包管理常用命令  
+sudo apt install <package_name>        # 安装单个软件包
+sudo apt install <package_name1> <p..e2> <p..e3>       安装多个软件包，中间以空格隔开
+sudo apt install <package_name>=<version_number>       安装指定版本的软件
+sudo apt install <package_name> --no-upgrade           安装指定的软件包，如果已经安装，则不升级它
+sudo apt install <package_name> --only-upgrade         只升级指定的软件包，如果该软件包不存在，则不需要安装它
+sudo apt remove <package_name>        移除指定的软件包
+sudo apt purge <package_name>         移除软件包及配置文件
+sudo apt update                    检查所有安装的软件包是否有可用的更新，注意这里只检查，不更新
+apt list --upgradeable             列出所有可升级的软件包
+apt list --installed               列出所有已安装的软件包
+apt list --all-versions            列出所有已安装软件的版本信息
+sudo apt upgrade <package_name>    更新指定的软件包，执行upgrade之前，最好先执行update检查一遍
+sudo apt dist-upgrade <p..e>       更新指定的软件包，同时智能处理软件包的依赖，同upgrade一样，执行之前最好执行一遍update检查一下可用的更新
+sudo apt search <keyword>          查找关键字为<keyword>的相关软件包，可以查未安装的软件包
+sudo apt show <package_name>       显示指定软件包的相关信息，同search一样，也可以显示系统未安装的软件包信息
+
+1.更新软件包列表：sudo apt update
+2.升级已安装的软件包：sudo apt upgrade
+3.全面升级系统（包括处理依赖关系变化）：sudo apt full-upgrade
+4.自动清理不再需要的依赖项：sudo apt autoremove
+5.清理下载的包文件缓存：sudo apt clean
+
+
+
+
+
+
+
+
+
+
+
+
+
 =================================================================== 知识科普 ==================================================================
 
 权限符号及其数字表示
