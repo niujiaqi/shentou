@@ -97,6 +97,19 @@ dirsearch.py [-u|--url] 目标网址 [-e|--extensions] 扩展名 [其他选项]
 项目地址 https://github.com/maurosoria/dirsearch?tab=readme-ov-file
 
 
+用过的命令：
+python3 dirsearch.py -u https://aw346.com/ -e php,html,js,css -t 10 --exclude-status 404,403 --scheme head.txt -o result.txt
+解释：
+-u https://aw346.com      扫描的目标url
+-e php,html,js,css        目标文件的后缀
+-t 10                    开启10个线程扫描   默认25  设置大了会扫描失败 服务器拒绝响应
+--exclude-status 404,403  过滤掉响应码404,403的
+--scheme head.txt        为请求添加请求头
+-o result.txt            将扫描结果输出到result.txt文件
+
+
+
+
 
 =======================================================End==========================================================
 
