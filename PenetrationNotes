@@ -187,6 +187,10 @@ sudo shutdown -c            # 取消关机
 sudo shutdown -k now "This is a warning message."        # 发送警告信息但不关机
 
 
+ps -f     查看当前运行的进程有哪些 -f 是列出详细信息
+
+终止前台当前进程，发送 CTRL + C 按键
+终止后台某进程 发送命令 kill 目标pid   或强制终止   kill -9 目标pid
 
 
 
